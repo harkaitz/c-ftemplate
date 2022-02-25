@@ -30,8 +30,6 @@ install: all
 	install -m644 $(MANPAGES_3) $(DESTDIR)$(PREFIX)/share/man/man3
 clean:
 	rm -f $(PROGRAMS)
-ssnip:
-	ssnip LICENSE $(HEADERS) $(MARKDOWNS) $(SOURCES) $(MANPAGES_3)
 
 ftemplate: ./tools/ftemplate.c $(HEADERS)
 	$(CC) -o $@ ./tools/ftemplate.c $(CFLAGS_ALL)
