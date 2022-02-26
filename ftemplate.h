@@ -50,7 +50,8 @@ bool ftemplate(FILE *_o, FILE *_i, const char _start[], const char _end[], size_
 }
 #endif
 /**l*
- * This software is free to use and modify.
+ * 
+ * MIT License
  * 
  * Bug reports, feature requests to gemini|https://harkadev.com/oss
  * Copyright (c) 2022 Harkaitz Agirre, harkaitz.aguirre@gmail.com
