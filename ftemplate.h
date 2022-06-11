@@ -6,6 +6,10 @@
 #include <string.h>
 #include <unistd.h>
 
+__attribute__((weak)) bool ftemplate_key (FILE *_fp1, const char _k[]) {
+    return false;
+}
+
 static __attribute__((unused))
 bool ftemplate(FILE *_o, FILE *_i, const char _start[], const char _end[], size_t _keysz, char _key[_keysz]) {
     int    start_match     = 0;

@@ -7,7 +7,7 @@ CFLAGS     =-Wall -g
 CPPFLAGS   =
 LIBS       =
 ## Sources and targets
-PROGRAMS   =ftemplate
+PROGRAMS   =ftemplate shp
 HEADERS    =ftemplate.h
 MARKDOWNS  =ftemplate.3.md README.md
 MANPAGES_3 =ftemplate.3
@@ -31,5 +31,7 @@ install: all
 clean:
 	rm -f $(PROGRAMS)
 
+shp: ./tools/shp.c $(HEADERS)
+	$(CC) -o $@ ./tools/shp.c $(CFLAGS_ALL)
 ftemplate: ./tools/ftemplate.c $(HEADERS)
 	$(CC) -o $@ ./tools/ftemplate.c $(CFLAGS_ALL)
