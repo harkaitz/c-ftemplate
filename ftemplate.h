@@ -11,7 +11,7 @@ __attribute__((weak)) bool ftemplate_key (FILE *_fp1, const char _k[]) {
 }
 
 static __attribute__((unused))
-bool ftemplate(FILE *_o, FILE *_i, const char _start[], const char _end[], size_t _keysz, char _key[_keysz]) {
+bool ftemplate(FILE *_o, FILE *_i, const char _start[], const char _end[], size_t _keysz, char _key[]) {
     int    start_match     = 0;
     int    end_match       = 0;
     bool   is_inside_block = false;
