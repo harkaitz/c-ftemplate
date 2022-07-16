@@ -11,12 +11,8 @@ HEADERS    =ftemplate.h
 SOURCES    =tools/ftemplate.c
 CFLAGS_ALL =$(LDFLAGS) $(CFLAGS) $(CPPFLAGS)
 
-## STANDARD TARGETS
-all: $(PROGRAMS)
-help:
-	@echo "all     : Build everything."
-	@echo "clean   : Clean files."
-	@echo "install : Install all produced files."
+## Usual targets.
+all:
 install: all
 	install -d                  $(DESTDIR)$(PREFIX)/bin
 	install -m755 $(PROGRAMS)   $(DESTDIR)$(PREFIX)/bin
@@ -25,10 +21,13 @@ install: all
 clean:
 	rm -f $(PROGRAMS)
 
+## Programs.
+all: $(PROGRAMS)
 shp: ./tools/shp.c $(HEADERS)
 	$(CC) -o $@ ./tools/shp.c $(CFLAGS_ALL)
 ftemplate: ./tools/ftemplate.c $(HEADERS)
 	$(CC) -o $@ ./tools/ftemplate.c $(CFLAGS_ALL)
+
 ## -- manpages --
 MAN_3=./ftemplate.3 
 install: install-man3
