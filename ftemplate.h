@@ -6,12 +6,13 @@
 #include <string.h>
 #include <unistd.h>
 
-__attribute__((weak)) bool ftemplate_key (FILE *_fp1, const char _k[]) {
+__attribute__((weak)) bool
+ftemplate_key (FILE *_fp1 __attribute__((unused)), const char _k[] __attribute__((unused))) {
     return false;
 }
 
-static __attribute__((unused))
-bool ftemplate(FILE *_o, FILE *_i, const char _start[], const char _end[], size_t _keysz, char _key[]) {
+static __attribute__((unused)) bool
+ftemplate(FILE *_o, FILE *_i, const char _start[], const char _end[], size_t _keysz, char _key[]) {
     int    start_match     = 0;
     int    end_match       = 0;
     bool   is_inside_block = false;
@@ -52,6 +53,40 @@ bool ftemplate(FILE *_o, FILE *_i, const char _start[], const char _end[], size_
     }
     return false;
 }
+
+static __attribute__((unused)) bool
+ftemplate_h (FILE *_fp1, FILE *_skel_fp0, FILE *_body_fp0, size_t keysz, char key[], bool *_in_body) {
+    if (!(*_in_body)) {
+        if (!ftemplate(_fp1, _skel_fp0, "{{", "}}", keysz, key)) {
+            return false;
+        } else if (_body_fp0 && !strcmp(key, "V:BODY")) {
+            *_in_body = true;
+            return ftemplate_h(_fp1, _skel_fp0, _body_fp0, keysz, key, _in_body);
+        } else {
+            return true;
+        }
+    } else {
+        if (ftemplate(_fp1, _body_fp0, "{{", "}}", keysz, key)) {
+            return true;
+        } else {
+            *_in_body = false;
+            return ftemplate_h(_fp1, _skel_fp0, _body_fp0, keysz, key, _in_body);
+        }
+    }
+}
+
+#define FTEMPLATE_SKEL_HTML_S \
+    "<!doctype html>"                    "\n" \
+    "<html lang=\"{{V:LANG}}\">"         "\n" \
+    "    <head>"                         "\n" \
+    "        <meta charset=\"utf-8\">"   "\n" \
+    "        <title>{{V:TITLE}}</title>" "\n" \
+    "    </head>"                        "\n" \
+    "    <body>"                         "\n" \
+    "        {{V:BODY}}"                 "\n" \
+    "    </body>"                        "\n" \
+    "</html>"                            "\n"
+
 #endif
 /**l*
  * 
