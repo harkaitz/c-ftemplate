@@ -7,7 +7,7 @@ CFLAGS     =-Wall -g
 CPPFLAGS   =
 LIBS       =
 PROGRAMS   =ftemplate shp
-HEADERS    =ftemplate.h incbin-fp.h
+HEADERS    =ftemplate.h
 SOURCES    =tools/ftemplate.c
 CFLAGS_ALL =$(LDFLAGS) $(CFLAGS) $(CPPFLAGS)
 
