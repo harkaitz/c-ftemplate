@@ -41,7 +41,8 @@ endif
 ifneq ($(PREFIX),)
 install: install-license
 install-license: LICENSE
-	mkdir -p $(DESTDIR)$(PREFIX)/share/doc/c-ftemplate
-	cp LICENSE $(DESTDIR)$(PREFIX)/share/doc/c-ftemplate
+	@echo 'I share/doc/c-ftemplate/LICENSE'
+	@mkdir -p $(DESTDIR)$(PREFIX)/share/doc/c-ftemplate
+	@cp LICENSE $(DESTDIR)$(PREFIX)/share/doc/c-ftemplate
 endif
 ## -- license --
