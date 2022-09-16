@@ -1,7 +1,9 @@
+#define _POSIX_C_SOURCE 201000L
 #include "../ftemplate.h"
 #include <unistd.h>
 #include <stdlib.h>
 #include <errno.h>
+#include <strings.h>
 
 #define PROGNAME "ftemplate"
 #define COPYRIGHT_LINE \
@@ -16,14 +18,15 @@ int main (int _argc, char *_argv[]) {
     int         retval            = 1;
     char       *found_keys_s[100] = {0};
     long        found_keys_c[100] = {0};
-    size_t      found_keysz       = 0;
+    int         found_keysz       = 0;
     char        current_key[512]  = {0};
     char       *known_keys[_argc*2+1];
     bool        list_keys_p       = false;
     bool        failed            = false;
     const char *start = "{{";
     const char *end   = "}}";
-    size_t      i,j;
+    int         i;
+    size_t      j;
     char       *s1,*s2;
     int       (*compare) (const char *s1, const char *s2) = strcasecmp;
     
