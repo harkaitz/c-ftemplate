@@ -14,19 +14,24 @@ CFLAGS_ALL =$(LDFLAGS) $(CFLAGS) $(CPPFLAGS)
 ## Usual targets.
 all:
 install: all
-	install -d                  $(DESTDIR)$(PREFIX)/bin
-	install -m755 $(PROGRAMS)   $(DESTDIR)$(PREFIX)/bin
-	install -d                  $(DESTDIR)$(PREFIX)/include
-	install -m755 $(HEADERS)    $(DESTDIR)$(PREFIX)/include
+	@echo "I bin/ $(PROGRAMS)"
+	@install -d                  $(DESTDIR)$(PREFIX)/bin
+	@install -m755 $(PROGRAMS)   $(DESTDIR)$(PREFIX)/bin
+	@echo "I include/ $(HEADERS)"
+	@install -d                  $(DESTDIR)$(PREFIX)/include
+	@install -m755 $(HEADERS)    $(DESTDIR)$(PREFIX)/include
 clean:
-	rm -f $(PROGRAMS)
+	@echo "D $(PROGRAMS)"
+	@rm -f $(PROGRAMS)
 
 ## Programs.
 all: $(PROGRAMS)
 shp: ./tools/shp.c $(HEADERS)
-	$(CC) -o $@ ./tools/shp.c $(CFLAGS_ALL)
+	@echo "B $@ $^"
+	@$(CC) -o $@ ./tools/shp.c $(CFLAGS_ALL)
 ftemplate: ./tools/ftemplate.c $(HEADERS)
-	$(CC) -o $@ ./tools/ftemplate.c $(CFLAGS_ALL)
+	@echo "B $@ $^"
+	@$(CC) -o $@ ./tools/ftemplate.c $(CFLAGS_ALL)
 
 ## -- manpages --
 install: install-man3
@@ -37,11 +42,9 @@ install-man3:
 	@cp ./ftemplate.3 $(DESTDIR)$(PREFIX)/share/man/man3
 ## -- manpages --
 ## -- license --
-ifneq ($(PREFIX),)
 install: install-license
 install-license: LICENSE
 	@echo 'I share/doc/c-ftemplate/LICENSE'
 	@mkdir -p $(DESTDIR)$(PREFIX)/share/doc/c-ftemplate
 	@cp LICENSE $(DESTDIR)$(PREFIX)/share/doc/c-ftemplate
-endif
 ## -- license --
