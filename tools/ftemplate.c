@@ -8,7 +8,7 @@
 #define PROGNAME "ftemplate"
 #define COPYRIGHT_LINE \
     "Bug reports, feature requests to gemini|https://harkadev.com/oss" "\n" \
-    "Copyright (c) 2022 Harkaitz Agirre, harkaitz.aguirre@gmail.com" "\n" \
+    "Copyright (c) 2023 Harkaitz Agirre, harkaitz.aguirre@gmail.com" "\n" \
     ""
 
 int main (int _argc, char *_argv[]) {
