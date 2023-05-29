@@ -6,7 +6,7 @@ CC         =cc
 CFLAGS     =-Wall -g
 CPPFLAGS   =
 LIBS       =
-PROGRAMS   =ftemplate shp
+PROGRAMS   =tools/ftemplate tools/shp tools/envsubs
 HEADERS    =ftemplate.h
 SOURCES    =tools/ftemplate.c
 CFLAGS_ALL =$(LDFLAGS) $(CFLAGS) $(CPPFLAGS)
@@ -21,10 +21,13 @@ clean:
 	rm -f $(PROGRAMS)
 ## -- Programs.
 all: $(PROGRAMS)
-shp: ./tools/shp.c $(HEADERS)
-	$(CC) -o $@ ./tools/shp.c $(CFLAGS_ALL)
-ftemplate: ./tools/ftemplate.c $(HEADERS)
-	$(CC) -o $@ ./tools/ftemplate.c $(CFLAGS_ALL)
+tools/shp: tools/shp.c $(HEADERS)
+	$(CC) -o $@ tools/shp.c $(CFLAGS_ALL)
+tools/ftemplate: tools/ftemplate.c $(HEADERS)
+	$(CC) -o $@ tools/ftemplate.c $(CFLAGS_ALL)
+tools/envsubs: tools/envsubs.c $(HEADERS)
+	$(CC) -o $@ tools/envsubs.c $(CFLAGS_ALL)
+
 ## -- manpages --
 install: install-man3
 install-man3:
